@@ -24,7 +24,7 @@ const stopWatch = new StopWatch();
 //===============================================
 // loading starts here
 
-import { EventEmitter, ProgressLocation, ProgressOptions, window } from 'vscode';
+import { ProgressLocation, ProgressOptions, window } from 'vscode';
 
 import { buildApi, IExtensionApi } from './api';
 import { IApplicationShell } from './common/application/types';
@@ -37,7 +37,6 @@ import { initializeGlobals } from './extensionInit';
 import { IServiceContainer } from './ioc/types';
 import { sendErrorTelemetry, sendStartupTelemetry } from './startupTelemetry';
 import { noop } from './common/utils/misc';
-import { KernelStateEventArgs } from './datascience/notebookExtensibility';
 
 durations.codeLoadingTime = stopWatch.elapsedTime;
 
@@ -65,7 +64,7 @@ export async function activate(context: IExtensionContext): Promise<IExtensionAp
         // Return a dummy object, to ensure other extension do not fall over.
         return {
             createBlankNotebook: () => Promise.resolve(),
-            onKernelStateChange: new EventEmitter<KernelStateEventArgs>().event,
+            onKernelStateChange: () => ({ dispose: noop }),
             ready: Promise.resolve(),
             registerCellToolbarButton: () => ({ dispose: noop }),
             registerNewNotebookContent: () => Promise.resolve(),
