@@ -127,7 +127,7 @@ async function activateUnsafe(
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function displayProgress(promise: Promise<any>) {
     const progressOptions: ProgressOptions = { location: ProgressLocation.Window, title: Common.loadingExtension() };
-    window.withProgress(progressOptions, () => promise);
+    window.withProgress(progressOptions, () => promise).then(noop, noop);
 }
 
 /////////////////////////////
