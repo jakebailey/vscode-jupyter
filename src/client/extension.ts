@@ -36,7 +36,7 @@ import { activateComponents } from './extensionActivation';
 import { initializeGlobals } from './extensionInit';
 import { IServiceContainer } from './ioc/types';
 import { sendErrorTelemetry, sendStartupTelemetry } from './startupTelemetry';
-import { noop } from './common/utils/misc';
+// import { noop } from './common/utils/misc';
 
 durations.codeLoadingTime = stopWatch.elapsedTime;
 
@@ -62,16 +62,16 @@ export async function activate(context: IExtensionContext): Promise<IExtensionAp
         traceError('Failed to active the Jupyter Extension', ex);
         // Disable this, as we don't want Python extension or any other extensions that depend on this to fall over.
         // Return a dummy object, to ensure other extension do not fall over.
-        return {
-            createBlankNotebook: () => Promise.resolve(),
-            onKernelStateChange: () => ({ dispose: noop }),
-            ready: Promise.resolve(),
-            registerCellToolbarButton: () => ({ dispose: noop }),
-            registerNewNotebookContent: () => Promise.resolve(),
-            registerPythonApi: noop,
-            registerRemoteServerProvider: noop,
-            showDataViewer: () => Promise.resolve()
-        };
+        // return {
+        //     createBlankNotebook: () => Promise.resolve(),
+        //     onKernelStateChange: () => ({ dispose: noop }),
+        //     ready: Promise.resolve(),
+        //     registerCellToolbarButton: () => ({ dispose: noop }),
+        //     registerNewNotebookContent: () => Promise.resolve(),
+        //     registerPythonApi: noop,
+        //     registerRemoteServerProvider: noop,
+        //     showDataViewer: () => Promise.resolve()
+        // };
     }
     // Send the "success" telemetry only if activation did not fail.
     // Otherwise Telemetry is send via the error handler.
